@@ -7,3 +7,6 @@ terraform.tfvars.*
 *.json
 .terraform.lock.hcl
 */*/.terraform.lock.hcl
+
+# Backend configuration
+backend.conf
