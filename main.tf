@@ -67,11 +67,11 @@ module "eks" {
   tags               = merge(var.tags, { "Name" = var.cluster_name })
 }
 
+# Phase 2: Kubernetes Resources (will be deployed via terraform targeting)
 module "crds" {
   source                 = "./modules/kubernetes/crds"
   humio_operator_version = var.humio_operator_version
   cluster_endpoint       = module.eks.cluster_endpoint
-
 }
 
 module "logscale" {

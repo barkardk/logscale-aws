@@ -6,6 +6,13 @@ variable "aws_region" {
 variable "aws_profile" {
   description = "The AWS profile to use for the EKS cluster"
   type        = string
+  default     = ""
+}
+
+variable "deploy_kubernetes_resources" {
+  description = "Whether to deploy Kubernetes resources (CRDs and LogScale). Set to false for infrastructure-only deployment."
+  type        = bool
+  default     = true
 }
 
 variable "tags" {

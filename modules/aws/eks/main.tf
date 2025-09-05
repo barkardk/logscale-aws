@@ -15,9 +15,9 @@ module "eks" {
 
   authentication_mode = "API_AND_CONFIG_MAP"
 
-  endpoint_public_access   = var.cluster_endpoint_public_access
+  endpoint_public_access = var.cluster_endpoint_public_access
 
-  enabled_log_types        = var.cluster_enabled_log_types
+  enabled_log_types = var.cluster_enabled_log_types
 
   kms_key_administrators = [data.aws_caller_identity.current.arn]
 

@@ -78,8 +78,8 @@ resource "aws_iam_role_policy_attachment" "logscale_policy_attachment" {
 
 # ELB Ingress controller
 module "iam_eks_role_lb_controller" {
-  source    = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts"
-  name = "AmazonEKS_LoadBalancer_Controller_Role-${var.cluster_name}"
+  source = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts"
+  name   = "AmazonEKS_LoadBalancer_Controller_Role-${var.cluster_name}"
 
   attach_load_balancer_controller_policy = true
 
