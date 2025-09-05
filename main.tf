@@ -61,6 +61,7 @@ module "eks" {
 
   zone_name          = var.zone_name
   hostname           = var.hostname
+  use_route53        = var.use_route53
   msk_sg_id          = module.vpc.msk_sg_id
   route53_record_ttl = var.route53_record_ttl
   s3_bucket_prefix   = var.eks_s3_bucket_prefix
@@ -97,6 +98,7 @@ module "logscale" {
   humio_operator_extra_values        = var.humio_operator_extra_values
   logscale_cluster_type              = var.logscale_cluster_type
   zone_name                          = var.zone_name
+  use_route53                        = var.use_route53
   acm_certificate_arn                = module.eks.acm_certificate_arn
   logscale_s3_bucket_id              = module.eks.logscale_s3_bucket_id
   msk_bootstrap_brokers              = module.msk.msk_bootstrap_brokers

@@ -126,9 +126,16 @@ variable "tags" {
   type        = map(string)
 }
 
+variable "use_route53" {
+  description = "Enable Route53 hosted zone and TLS certificate management"
+  type        = bool
+  default     = false
+}
+
 variable "zone_name" {
-  description = "Route53 hosted zone domain name"
+  description = "Route53 hosted zone domain name (required when use_route53 = true)"
   type        = string
+  default     = ""
 }
 
 variable "msk_sg_id" {

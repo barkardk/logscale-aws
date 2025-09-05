@@ -50,6 +50,25 @@ variable "ami_type" {
 variable "route53_record_ttl" {
   description = "TTL of the Logscale route53 record"
   type        = number
+  default     = 60
+}
+
+variable "ca_server" {
+  description = "Certificate Authority Server."
+  type        = string
+  default     = "https://acme-v02.api.letsencrypt.org/directory"
+}
+
+variable "build_number" {
+  description = "Build number from CI/CD pipeline"
+  type        = string
+  default     = "0"
+}
+
+variable "logscale_cicd_cluster_name" {
+  description = "CICD cluster name for testing purposes"
+  type        = string
+  default     = ""
 }
 
 variable "logscale_namespace" {
@@ -103,11 +122,6 @@ variable "issuer_private_key" {
   type        = string
 }
 
-variable "ca_server" {
-  description = "Certificate Authority Server."
-  type        = string
-}
-
 variable "humio_operator_chart_version" {
   description = "Humio Operator helm chart version"
   type        = string
@@ -153,9 +167,16 @@ variable "msk_cluster_name" {
   type        = string
 }
 
+variable "use_route53" {
+  description = "Enable Route53 hosted zone and TLS certificate management"
+  type        = bool
+  default     = false
+}
+
 variable "zone_name" {
-  description = "Route53 hosted zone domain name"
+  description = "Route53 hosted zone domain name (required when use_route53 = true)"
   type        = string
+  default     = ""
 }
 
 variable "humiocluster_license" {
@@ -164,8 +185,9 @@ variable "humiocluster_license" {
 }
 
 variable "hostname" {
-  description = "Hostname of the Logscale cluster"
+  description = "Hostname of the Logscale cluster (required when use_route53 = true)"
   type        = string
+  default     = "logscale"
 }
 
 variable "eks_s3_bucket_prefix" {

@@ -15,7 +15,7 @@ output "cluster_name" {
 
 output "acm_certificate_arn" {
   description = "The Amazon Resource Name (ARN) of the ACM certificate issued by ingress"
-  value       = aws_acm_certificate.logscale_cert.arn
+  value       = var.use_route53 ? aws_acm_certificate.logscale_cert[0].arn : null
 }
 
 output "logscale_s3_bucket_id" {

@@ -103,14 +103,22 @@ variable "logscale_cluster_type" {
   }
 }
 
+variable "use_route53" {
+  description = "Enable Route53 hosted zone and TLS certificate management"
+  type        = bool
+  default     = false
+}
+
 variable "zone_name" {
-  description = "Route53 hosted zone domain name"
+  description = "Route53 hosted zone domain name (required when use_route53 = true)"
   type        = string
+  default     = ""
 }
 
 variable "acm_certificate_arn" {
-  description = "ACM issued certificate ARN"
+  description = "ACM issued certificate ARN (optional when use_route53 = false)"
   type        = string
+  default     = null
 }
 
 variable "logscale_s3_bucket_id" {
