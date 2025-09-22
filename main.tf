@@ -16,6 +16,7 @@ module "msk" {
   kafka_version              = var.kafka_version
   msk_cluster_name           = var.msk_cluster_name
   msk_node_volume_size       = local.cluster_size_selected["kafka_broker_data_disk_size"]
+  msk_log_retention_hours    = var.msk_log_retention_hours
   tags                       = var.tags
 }
 

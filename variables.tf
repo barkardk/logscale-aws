@@ -167,6 +167,12 @@ variable "msk_cluster_name" {
   type        = string
 }
 
+variable "msk_log_retention_hours" {
+  description = "Log retention time (in hours) for the MSK cluster"
+  type        = number
+  default     = 4
+}
+
 variable "use_route53" {
   description = "Enable Route53 hosted zone and TLS certificate management"
   type        = bool
