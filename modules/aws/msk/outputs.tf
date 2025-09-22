@@ -12,3 +12,13 @@ output "msk_cluster_arn" {
   description = "Amazon Resource Name (ARN) of the MSK cluster"
   value       = module.msk_cluster.arn
 }
+
+output "msk_config_arn" {
+  description = "Amazon Resource Name (ARN) of the MSK configuration"
+  value       = aws_msk_configuration.msk_config.arn
+}
+
+output "msk_config_name" {
+  description = "Name of the MSK configuration"
+  value       = aws_msk_configuration.msk_config.name
+}
