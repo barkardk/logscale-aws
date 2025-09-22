@@ -37,6 +37,6 @@ logscale_cluster_size = "xsmall"
 logscale_cluster_type = "internal-ingest"
 kafka_version         = "3.5.1"
 msk_cluster_name      = "msk-cluster"
-zone_name             = ""  # your Route53 zone name
+zone_name             = "" # your Route53 zone name
 hostname              = "awstest"
 route53_record_ttl    = 60
