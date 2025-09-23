@@ -7,13 +7,19 @@ data "http" "cert_manager_crds" {
 
 
 # Decode the YAML content from the CRD manifest and split into individual documents
-locals { cert_manager_crds_manifests = [for doc in split("---", data.http.cert_manager_crds.response_body) : yamldecode(doc)] }
+locals { 
+  cert_manager_crds_manifests = [
+    for doc in split("---", data.http.cert_manager_crds.response_body) : 
+    yamldecode(doc) if doc != null && trimspace(doc) != ""
+  ]
+}
 
 # Apply each CRD manifest
 resource "kubernetes_manifest" "cert_manager_crds" {
   for_each = {
     for idx, manifest in local.cert_manager_crds_manifests :
-    "${manifest.kind}_${manifest.metadata.name}_${idx}" => manifest
+    "${try(manifest.kind, "unknown")}_${try(manifest.metadata.name, "unknown")}_${idx}" => manifest
+    if try(manifest.kind, null) != null && try(manifest.metadata.name, null) != null
   }
 
   manifest = each.value

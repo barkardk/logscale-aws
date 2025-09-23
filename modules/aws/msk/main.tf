@@ -36,11 +36,17 @@ PROPERTIES
   description = "MSK configuration for ${var.msk_cluster_name} with ${var.msk_log_retention_hours}h retention"
 }
 
+# Add explicit wait for configuration to be available
+resource "time_sleep" "wait_for_msk_config" {
+  depends_on = [aws_msk_configuration.msk_config]
+  create_duration = "30s"
+}
+
 module "msk_cluster" {
   source = "terraform-aws-modules/msk-kafka-cluster/aws"
 
-  # Ensure configuration is created before cluster
-  depends_on = [aws_msk_configuration.msk_config]
+  # Ensure configuration is created and propagated before cluster
+  depends_on = [aws_msk_configuration.msk_config, time_sleep.wait_for_msk_config]
 
   name                   = "${var.msk_cluster_name}-${var.cluster_name}"
   kafka_version          = var.kafka_version

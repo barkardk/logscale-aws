@@ -94,7 +94,7 @@ module "iam_eks_role_lb_controller" {
 
 # External DNS
 resource "aws_iam_policy" "external_dns" {
-  name        = "AllowExternalDNSUpdates"
+  name        = "AllowExternalDNSUpdates-${var.cluster_name}"
   description = var.external_dns_iam_policy_description
   policy = jsonencode({
     Version = "2012-10-17",
@@ -201,7 +201,7 @@ data "aws_iam_policy_document" "ebs_policy" {
 }
 
 resource "aws_iam_policy" "ebs_policy" {
-  name   = "AmazonEKS_EBS_CSI_DriverPolicy"
+  name   = "AmazonEKS_EBS_CSI_DriverPolicy-${var.cluster_name}"
   policy = data.aws_iam_policy_document.ebs_policy.json
 }
 
